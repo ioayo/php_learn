@@ -1,0 +1,67 @@
+
+<?php 
+		//create connection to database
+		$connection = mysqli_connect('localhost', 'root', '', 'course_test');
+		//check if connection is done
+		if($connection) {
+			echo "we are connected";
+		} else {
+			die("Database connection failed");
+		}
+		$query = "SELECT * FROM users";
+		$result = mysqli_query($connection, $query);
+
+		//check if query is done
+		if(!$result) {
+			die('Query FAILED');
+		};
+
+
+
+
+	
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login App</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body>
+	  <div class="container">
+	  	<div class="row">
+	  		<div class="col-xs-6">
+	  			<form action="form.php" method="post">
+	  				<div class="form-group">
+	  					<label for="username">username</label>
+	  					<input type="text" name="username" class="form-control">
+	  				</div>
+	  				<div class="form-group">
+	  					<label for="password" name="password">password</label>
+	  					<input type="password" name="password" class="form-control">
+	  				</div>
+	  				<input type="submit" name="submit" class="btn btn-primary">
+	  			</form>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-sm-6">
+	  			<?php 
+	  				while($row = mysqli_fetch_assoc($result)) {
+	  					?>
+	  					<pre>
+	  						<?php  
+	  							print_r($row);
+	  						?>
+	  					</pre>
+	  					<?php 
+	  				}
+	  			?>
+	  		</div>
+	  	</div>
+	  </div>
+</body>
+</html>
